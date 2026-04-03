@@ -1,24 +1,12 @@
-<!DOCTYPE html>
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Qurban 2026</title>
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-
     <style>
-        /* SweetAlert2 Custom Variables & Theme */
         :root {
-            --swal2-outline: 0 0 0 3px rgba(100, 150, 200, 0.5);
-            --swal2-container-padding: 0.625em;
-            --swal2-backdrop: rgba(0, 0, 0, 0.4);
-            --swal2-background: white;
-            --swal2-color: #545454;
-            --swal2-confirm-button-background-color: #7066e0;
-            
-            /* UI Theme Variables */
             --ng: #00ff88;
             --ngd: rgba(0, 255, 136, .2);
             --db: #050b0a;
@@ -28,7 +16,6 @@
             --tm2: #8ab4a5;
         }
 
-        /* Base Body Style */
         body {
             font-family: 'Rajdhani', sans-serif;
             background: radial-gradient(circle at 50% 0, #062a1f, var(--db)) fixed;
@@ -37,7 +24,6 @@
             padding: 30px 15px;
         }
 
-        /* Container & Glassmorphism Effect */
         .container {
             max-width: 850px;
             margin: 0 auto;
@@ -51,7 +37,6 @@
             overflow: hidden;
         }
 
-        /* Scanning Animation Line */
         .container::before {
             content: '';
             position: absolute;
@@ -65,11 +50,11 @@
         }
 
         @keyframes sc {
-            0% { top: 0%; }
-            100% { top: 100%; }
+            to {
+                top: 100%;
+            }
         }
 
-        /* Header Styles */
         .ht {
             display: flex;
             align-items: center;
@@ -88,29 +73,377 @@
             flex: 3 !important;
         }
 
-        /* Anda boleh tambah CSS tambahan di bawah ini */
+        .ht-txt h1 {
+            color: var(--ng);
+            margin: 0 0 5px;
+            font-size: 32px;
+            text-shadow: 0 0 10px var(--ngd);
+        }
+
+        .ht-txt p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .lg {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--ng);
+            background: #fff;
+        }
+
+        .st {
+            background: linear-gradient(90deg, var(--ngd), transparent);
+            color: var(--ng);
+            padding: 10px 20px;
+            border-left: 4px solid var(--ng);
+            margin: 35px 0 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .fg {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--tm2);
+            font-weight: 600;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 0, 0, .4);
+            border: 1px solid var(--bc);
+            border-radius: 6px;
+            color: var(--ng);
+            font-family: inherit;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--ng);
+            box-shadow: 0 0 15px rgba(0, 255, 136, .2);
+        }
+
+        .rg {
+            background: rgba(0, 0, 0, .3);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 255, 136, .15);
+        }
+
+        .ro {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .ro input {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+        }
+
+        .ab {
+            background: rgba(0, 255, 136, .02);
+            border: 1px dashed var(--ng);
+            padding: 20px;
+            text-align: center;
+            color: var(--ng);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .bi {
+            display: none;
+            background: rgba(0, 0, 0, .5);
+            border: 1px solid var(--ng);
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .bi h4 {
+            color: var(--ng);
+            margin: 0 0 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid rgba(0, 255, 136, .15);
+            padding: 12px;
+        }
+
+        th {
+            background: rgba(0, 255, 136, .1);
+            color: var(--ng);
+        }
+
+        .nc {
+            text-align: center;
+            color: var(--tm2);
+            width: 40px;
+        }
+
+        .pi {
+            border: none !important;
+            background: 0 0 !important;
+            padding: 8px !important;
+        }
+
+        .pn {
+            color: #f36;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        #bw {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .btn {
+            background: 0 0;
+            color: var(--ng);
+            padding: 16px;
+            border: 1px solid var(--ng);
+            width: 100%;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 40px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: var(--ng);
+            color: var(--db);
+        }
+
+        .fs {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--ngd);
+            font-size: 14px;
+            color: var(--tm2);
+        }
+
+        .dn {
+            color: var(--ng);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .ht {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+
+            .ht div:first-child {
+                display: none;
+            }
+
+            .pn {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .lg {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <header class="ht">
+        <div class="ht">
             <div></div>
             <div class="ht-txt">
-                <h1>SISTEM QURBAN 2026</h1>
-                <p>Pengurusan E-Media MKSLB</p>
+                <h1>SISTEM QURBANPRO 2026</h1>
+                <p>MASJID KAMPUNG SUNGAI LANG BARU</p>
             </div>
-            <div></div>
-        </header>
+            <div class="lg">
+                <img src="https://arleta.site/interactivelink/1610/LOGO-MKSLB.png" class="logo">
+            </div>
+        </div>
 
-        <main>
-            <p style="text-align: center;">Selamat Datang ke Dashboard Pengurusan Qurban.</p>
-        </main>
+        <form id="qForm">
+            <div class="st">A. MAKLUMAT PEWAKIL</div>
+            <div class="fg">
+                <label>[ DATA ] NAMA PENUH :</label>
+                <input type="text" id="nm" name="nama" required="">
+            </div>
+            <div class="fg">
+                <label>[ DATA ] NO. K/P :</label>
+                <input type="text" name="ic" required="">
+            </div>
+            <div class="fg">
+                <label>[ DATA ] NO. TELEFON :</label>
+                <input type="tel" name="telefon" required="">
+            </div>
+            <div class="fg">
+                <label>[ DATA ] ALAMAT :</label>
+                <input type="text" name="alamat" required="">
+            </div>
+
+            <div class="st">B. LAFAZ AKAD &amp; PESERTA</div>
+            <div class="ab">"Adalah dengan ini saya mewakilkan pihak Masjid Kampung Sungai Lang Baru untuk melaksanakan ibadah Qurban..."</div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th class="nc">ID</th>
+                        <th>NAMA PESERTA (RM 900)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="nc">01</td><td><input type="text" name="peserta_1" class="pi" required=""></td></tr>
+                    <tr><td class="nc">02</td><td><input type="text" name="peserta_2" class="pi"></td></tr>
+                    <tr><td class="nc">03</td><td><input type="text" name="peserta_3" class="pi"></td></tr>
+                    <tr><td class="nc">04</td><td><input type="text" name="peserta_4" class="pi"></td></tr>
+                    <tr><td class="nc">05</td><td><input type="text" name="peserta_5" class="pi"></td></tr>
+                    <tr><td class="nc">06</td><td><input type="text" name="peserta_6" class="pi"></td></tr>
+                    <tr><td class="nc">07</td><td><input type="text" name="peserta_7" class="pi"></td></tr>
+                </tbody>
+            </table>
+
+            <div class="pn"><span>*RM 900 / BAHAGIAN</span><span style="color:var(--ng)">[ KIRAAN AUTO AKTIF ]</span></div>
+
+            <div class="st">C. PILIHAN AGIHAN</div>
+            <div class="rg">
+                <div class="ro"><input type="radio" name="agihan" value="Sedekah Semua" required=""><label>MENYERAHKAN KESELURUHAN KEPADA MASJID</label></div>
+                <div class="ro"><input type="radio" name="agihan" value="Ambil Sebahagian"><label>MENGHENDAKI SEBAHAGIAN (3KG DAGING, TULANG, ORGAN)</label></div>
+            </div>
+
+            <div class="st">D. STATUS PEMBAYARAN</div>
+            <div class="fg">
+                <label>JUMLAH (RM) :</label>
+                <input type="number" id="jb" name="jumlah_bayar" required="" readonly="" style="background:rgba(0,255,136,.1);font-weight:700">
+            </div>
+
+            <div class="fg">
+                <label>MOD PEMBAYARAN :</label>
+                <select id="kb" name="kaedah_bayar" required="">
+                    <option value="">-- PILIH MOD --</option>
+                    <option value="Tunai">TUNAI (SERAH AJK)</option>
+                    <option value="Online Transfer">ONLINE TRANSFER</option>
+                    <option value="ToyyibPay">PAYMENT GATEWAY (TOYYIBPAY)</option>
+                </select>
+            </div>
+
+            <div id="bi" class="bi">
+                <h4>[ MAKLUMAT AKAUN ]</h4>
+                <p>Masjid Kampung Sungai Lang Baru<br>No. Akaun: <b style="color:var(--ng)"><a href="tel:1207 4010 0317 14">1207 4010 0317 14</a></b><br>Bank Islam Malaysia Berhad</p>
+            </div>
+
+            <div class="st">E. KOMITMEN KEHADIRAN</div>
+            <div class="rg">
+                <div class="ro"><input type="radio" name="kehadiran" value="Hadir" required=""><label>SAYA AKAN HADIR</label></div>
+                <div class="ro"><input type="radio" name="kehadiran" value="Wakil"><label>MENGHANTAR WAKIL</label></div>
+            </div>
+
+            <div id="bw" class="fg">
+                <label>NAMA WAKIL :</label>
+                <input type="text" id="nw" name="nama_wakil">
+            </div>
+
+            <button type="button" id="btn" class="btn">HANTAR BORANG SEKARANG</button>
+        </form>
+
+        <div class="fs">DIBANGUNKAN OLEH <span class="dn">NISKALA PAWAKA</span></div>
     </div>
 
     <script>
-        // Contoh penggunaan SweetAlert2 yang telah di-import
-        // Swal.fire('Sistem Aktif', 'Sistem Qurban 2026 sedia digunakan', 'success');
+        // TUKAR URL GOOGLE SCRIPT & NO TELEFON DI BAWAH INI
+        const URL = "https://script.google.com/macros/s/AKfycbzEUBhdwQY4L7eRklbohtek8V_fx8xY4_YbeTeJe38AnlbuLRV0ozxp0Q8vB94T_D2Q/exec";
+        const TEL = "60133787248";
+
+        const sw = Swal.mixin({ background: '#0a1914', color: '#00ff88' });
+        let kb = document.getElementById('kb'),
+            bi = document.getElementById('bi'),
+            bw = document.getElementById('bw'),
+            nw = document.getElementById('nw'),
+            jb = document.getElementById('jb'),
+            pi = document.querySelectorAll('.pi');
+
+        kb.onchange = () => bi.style.display = (kb.value === 'Online Transfer') ? 'block' : 'none';
+        
+        document.querySelectorAll('[name="kehadiran"]').forEach(r => r.onchange = () => {
+            bw.style.display = (r.value === 'Wakil') ? 'block' : 'none';
+            nw.required = (r.value === 'Wakil');
+        });
+
+        const kira = () => {
+            let c = 0;
+            pi.forEach(i => {
+                if (i.value.trim() !== '') c++;
+            });
+            jb.value = (c > 0) ? c * 900 : '';
+        };
+
+        pi.forEach(i => ['input', 'keyup', 'change'].forEach(e => i.addEventListener(e, kira)));
+
+        document.getElementById('btn').onclick = (e) => {
+            e.preventDefault();
+            let f = document.getElementById('qForm');
+
+            if (!f.checkValidity()) {
+                f.reportValidity();
+                return sw.fire({ icon: 'warning', title: 'AMARAN', text: 'LENGKAPKAN BORANG', iconColor: '#fc0' })
+            }
+
+            sw.fire({ title: 'TRANSMISI DATA', text: 'MENGHANTAR MAKLUMAT...', didOpen: () => Swal.showLoading() });
+
+            fetch(URL, { method: 'POST', body: new FormData(f) }).then(r => {
+                if (kb.value === 'Online Transfer') {
+                    sw.fire({ icon: 'success', title: 'BERJAYA', text: 'SILA HANTAR RESIT KEPADA BENDAHARI', showCancelButton: true, confirmButtonText: 'HANTAR WHATSAPP', cancelButtonText: 'TUTUP' }).then(x => {
+                        if (x.isConfirmed) {
+                            let wtxt = `Assalamualaikum Bendahari. Saya *${document.getElementById('nm').value}* mendaftar Qurban. Jumlah: *RM${jb.value}*. Ini resit saya.`;
+                            window.open(`https://wa.me/${TEL}?text=${encodeURIComponent(wtxt)}`, '_blank')
+                        }
+                        f.reset();
+                        bi.style.display = bw.style.display = 'none';
+                    })
+                } else if (kb.value === 'ToyyibPay') {
+                    sw.fire({ icon: 'success', title: 'BERJAYA', text: 'KE TOYYIBPAY SEBENTAR LAGI...', showConfirmButton: false, timer: 3000 }).then(() => {
+                        window.location.href = "https://toyyibpay.com/Bayaran-Qurban-2026";
+                        f.reset();
+                        bi.style.display = bw.style.display = 'none';
+                    })
+                } else {
+                    sw.fire('BERJAYA', 'MAKLUMAT DIREKOD. SILA BUAT SERAHAN TUNAI.', 'success').then(() => {
+                        f.reset();
+                        bi.style.display = bw.style.display = 'none';
+                    })
+                }
+            }).catch(e => sw.fire('RALAT', 'GAGAL HANTAR', 'error'))
+        };
+        kira();
     </script>
 </body>
 </html>
