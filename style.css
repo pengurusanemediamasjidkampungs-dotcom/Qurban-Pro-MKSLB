@@ -1,0 +1,74 @@
+/* SweetAlert2 Custom Variables */
+:root {
+    --swal2-outline: 0 0 0 3px rgba(100, 150, 200, 0.5);
+    --swal2-background: white;
+    --swal2-color: #545454;
+    --swal2-confirm-button-background-color: #7066e0;
+    
+    /* System Theme Variables */
+    --ng: #00ff88;
+    --ngd: rgba(0, 255, 136, .2);
+    --db: #050b0a;
+    --pb: rgba(6, 20, 15, .65);
+    --bc: rgba(0, 255, 136, .3);
+    --tm: #e2f1ec;
+    --tm2: #8ab4a5;
+}
+
+/* Base Body Style */
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: radial-gradient(circle at 50% 0, #062a1f, var(--db)) fixed;
+    color: var(--tm);
+    margin: 0;
+    padding: 30px 15px;
+}
+
+/* Main Container with Glassmorphism */
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: var(--pb);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--bc);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 255, 136, .05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scanning Animation Line */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ng), transparent);
+    animation: sc 4s linear infinite;
+    opacity: .5;
+}
+
+@keyframes sc {
+    to { top: 100%; }
+}
+
+/* Header Section */
+.ht {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--bc);
+    padding-bottom: 15px;
+}
+
+.ht div { flex: 1; }
+.ht-txt { 
+    text-align: center; 
+    flex: 3 !important; 
+}
+
+/* Masukkan semua baki CSS SweetAlert2 anda di bawah jika perlu */
