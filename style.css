@@ -1,58 +1,69 @@
-/* SweetAlert2 Custom Variables */
+/* Sistem Qurban 2026 - Official Stylesheet
+   Theme: Modern Cyber-Glassmorphism
+*/
+
 :root {
-    --swal2-outline: 0 0 0 3px rgba(100, 150, 200, 0.5);
-    --swal2-background: white;
-    --swal2-color: #545454;
-    --swal2-confirm-button-background-color: #7066e0;
+    /* Color Palette */
+    --ng: #00ff88;                  /* Neon Green */
+    --ngd: rgba(0, 255, 136, 0.2);  /* Neon Green Diffused */
+    --db: #050b0a;                  /* Deep Black/Green Background */
+    --pb: rgba(6, 20, 15, 0.75);    /* Panel Background with Transparency */
+    --bc: rgba(0, 255, 136, 0.25);  /* Border Color */
+    --tm: #e2f1ec;                  /* Text Main */
+    --tm2: #8ab4a5;                 /* Text Muted */
+    --glass: rgba(255, 255, 255, 0.03);
     
-    /* System Theme Variables */
-    --ng: #00ff88;
-    --ngd: rgba(0, 255, 136, .2);
-    --db: #050b0a;
-    --pb: rgba(6, 20, 15, .65);
-    --bc: rgba(0, 255, 136, .3);
-    --tm: #e2f1ec;
-    --tm2: #8ab4a5;
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base Body Style */
+/* Base Reset & Background */
 body {
     font-family: 'Rajdhani', sans-serif;
     background: radial-gradient(circle at 50% 0, #062a1f, var(--db)) fixed;
     color: var(--tm);
     margin: 0;
-    padding: 30px 15px;
+    padding: 40px 20px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-/* Main Container with Glassmorphism */
+/* Main Container */
 .container {
-    max-width: 850px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
     background: var(--pb);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--bc);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 255, 136, .05);
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                0 0 30px rgba(0, 255, 136, 0.05);
     position: relative;
     overflow: hidden;
 }
 
-/* Scanning Animation Line */
+/* Scanner/Scanning Line Animation */
 .container::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -100%;
     left: 0;
     right: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--ng), transparent);
-    animation: sc 4s linear infinite;
-    opacity: .5;
+    animation: scanLine 6s linear infinite;
+    opacity: 0.4;
+    z-index: 1;
 }
 
-@keyframes sc {
-    to { top: 100%; }
+@keyframes scanLine {
+    0% { top: -2%; }
+    100% { top: 102%; }
 }
 
 /* Header Section */
@@ -60,15 +71,119 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     border-bottom: 1px solid var(--bc);
-    padding-bottom: 15px;
+    padding-bottom: 25px;
 }
 
 .ht div { flex: 1; }
-.ht-txt { 
-    text-align: center; 
-    flex: 3 !important; 
+
+.ht-txt {
+    text-align: center;
+    flex: 3 !important;
 }
 
-/* Masukkan semua baki CSS SweetAlert2 anda di bawah jika perlu */
+.ht-txt h1 {
+    color: var(--ng);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 0;
+    font-size: 2.2rem;
+    text-shadow: 0 0 15px var(--ngd);
+}
+
+.ht-txt p {
+    color: var(--tm2);
+    margin: 5px 0 0;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+/* Typography & Content */
+h2, h3 {
+    color: var(--ng);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+p {
+    color: var(--tm2);
+}
+
+/* Form Elements & Interactive Components */
+.card {
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    border-color: var(--bc);
+    background: rgba(0, 255, 136, 0.03);
+    transform: translateY(-2px);
+}
+
+button {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--ngd);
+    border: 1px solid var(--ng);
+    color: var(--ng);
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: var(--transition);
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background: var(--ng);
+    color: var(--db);
+    box-shadow: 0 0 20px var(--ngd);
+}
+
+/* SweetAlert2 Custom Overrides for System Aesthetic */
+.swal2-popup {
+    background: var(--pb) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--bc) !important;
+    color: var(--tm) !important;
+    font-family: 'Rajdhani', sans-serif !important;
+}
+
+.swal2-title {
+    color: var(--ng) !important;
+    text-transform: uppercase;
+}
+
+.swal2-html-container {
+    color: var(--tm2) !important;
+}
+
+.swal2-confirm {
+    background-color: var(--ng) !important;
+    color: var(--db) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+    }
+    
+    .ht {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .ht-txt h1 {
+        font-size: 1.6rem;
+    }
+}
