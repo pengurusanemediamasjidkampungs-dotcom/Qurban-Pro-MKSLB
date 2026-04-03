@@ -6,6 +6,8 @@
     --bc: rgba(0, 255, 136, .3);
     --tm: #e2f1ec;
     --tm2: #8ab4a5;
+    /* Tetapkan saiz fon asas untuk rem */
+    font-size: 16px; 
 }
 
 body {
@@ -13,18 +15,18 @@ body {
     background: radial-gradient(circle at 50% 0, #062a1f, var(--db)) fixed;
     color: var(--tm);
     margin: 0;
-    padding: 30px 15px;
+    padding: 1.875rem 0.9375rem; /* 30px 15px */
 }
 
 .container {
-    max-width: 850px;
+    max-width: 53.125rem; /* 850px */
     margin: 0 auto;
     background: var(--pb);
     backdrop-filter: blur(20px);
-    border: 1px solid var(--bc);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 255, 136, .05);
+    border: 0.0625rem solid var(--bc); /* 1px */
+    padding: 2.5rem; /* 40px */
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 0 1.875rem rgba(0, 255, 136, .05); /* 30px */
     position: relative;
     overflow: hidden;
 }
@@ -35,7 +37,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 0.125rem; /* 2px */
     background: linear-gradient(90deg, transparent, var(--ng), transparent);
     animation: sc 4s linear infinite;
     opacity: .5;
@@ -51,9 +53,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
-    border-bottom: 1px solid var(--bc);
-    padding-bottom: 15px;
+    margin-bottom: 1.875rem; /* 30px */
+    border-bottom: 0.0625rem solid var(--bc); /* 1px */
+    padding-bottom: 0.9375rem; /* 15px */
 }
 
 .ht div {
@@ -67,14 +69,14 @@ body {
 
 .ht-txt h1 {
     color: var(--ng);
-    margin: 0 0 5px;
-    font-size: 32px;
-    text-shadow: 0 0 10px var(--ngd);
+    margin: 0 0 0.3125rem; /* 5px */
+    font-size: 2rem; /* 32px */
+    text-shadow: 0 0 0.625rem var(--ngd); /* 10px */
 }
 
 .ht-txt p {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.125rem; /* 18px */
 }
 
 .lg {
@@ -83,31 +85,31 @@ body {
 }
 
 .logo {
-    width: 80px;
-    height: 80px;
+    width: 5rem; /* 80px */
+    height: 5rem; /* 80px */
     border-radius: 50%;
-    border: 2px solid var(--ng);
+    border: 0.125rem solid var(--ng); /* 2px */
     background: #fff;
 }
 
 .st {
     background: linear-gradient(90deg, var(--ngd), transparent);
     color: var(--ng);
-    padding: 10px 20px;
-    border-left: 4px solid var(--ng);
-    margin: 35px 0 20px;
-    font-size: 18px;
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    border-left: 0.25rem solid var(--ng); /* 4px */
+    margin: 2.1875rem 0 1.25rem; /* 35px 0 20px */
+    font-size: 1.125rem; /* 18px */
     text-transform: uppercase;
     font-weight: 700;
 }
 
 .fg {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* 20px */
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem; /* 8px */
     color: var(--tm2);
     font-weight: 600;
 }
@@ -115,13 +117,13 @@ label {
 input,
 select {
     width: 100%;
-    padding: 14px;
+    padding: 0.875rem; /* 14px */
     background: rgba(0, 0, 0, .4);
-    border: 1px solid var(--bc);
-    border-radius: 6px;
+    border: 0.0625rem solid var(--bc); /* 1px */
+    border-radius: 0.375rem; /* 6px */
     color: var(--ng);
     font-family: inherit;
-    font-size: 16px;
+    font-size: 1rem; /* 16px */
     box-sizing: border-box;
 }
 
@@ -129,61 +131,61 @@ input:focus,
 select:focus {
     outline: none;
     border-color: var(--ng);
-    box-shadow: 0 0 15px rgba(0, 255, 136, .2);
+    box-shadow: 0 0 0.9375rem rgba(0, 255, 136, .2); /* 15px */
 }
 
 .rg {
     background: rgba(0, 0, 0, .3);
-    padding: 15px;
-    border-radius: 6px;
-    border: 1px solid rgba(0, 255, 136, .15);
+    padding: 0.9375rem; /* 15px */
+    border-radius: 0.375rem; /* 6px */
+    border: 0.0625rem solid rgba(0, 255, 136, .15); /* 1px */
 }
 
 .ro {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem; /* 12px */
 }
 
 .ro input {
-    width: 18px;
-    height: 18px;
-    margin-right: 12px;
+    width: 1.125rem; /* 18px */
+    height: 1.125rem; /* 18px */
+    margin-right: 0.75rem; /* 12px */
 }
 
 .ab {
     background: rgba(0, 255, 136, .02);
-    border: 1px dashed var(--ng);
-    padding: 20px;
+    border: 0.0625rem dashed var(--ng); /* 1px */
+    padding: 1.25rem; /* 20px */
     text-align: center;
     color: var(--ng);
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* 20px */
     font-style: italic;
 }
 
 .bi {
     display: none;
     background: rgba(0, 0, 0, .5);
-    border: 1px solid var(--ng);
-    padding: 20px;
-    margin-top: 15px;
+    border: 0.0625rem solid var(--ng); /* 1px */
+    padding: 1.25rem; /* 20px */
+    margin-top: 0.9375rem; /* 15px */
 }
 
 .bi h4 {
     color: var(--ng);
-    margin: 0 0 10px;
+    margin: 0 0 0.625rem; /* 10px */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem; /* 10px */
 }
 
 th,
 td {
-    border: 1px solid rgba(0, 255, 136, .15);
-    padding: 12px;
+    border: 0.0625rem solid rgba(0, 255, 136, .15); /* 1px */
+    padding: 0.75rem; /* 12px */
 }
 
 th {
@@ -194,13 +196,13 @@ th {
 .nc {
     text-align: center;
     color: var(--tm2);
-    width: 40px;
+    width: 2.5rem; /* 40px */
 }
 
 .pi {
     border: none !important;
     background: 0 0 !important;
-    padding: 8px !important;
+    padding: 0.5rem !important; /* 8px */
 }
 
 .pn {
@@ -208,23 +210,23 @@ th {
     display: flex;
     justify-content: space-between;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px */
 }
 
 #bw {
     display: none;
-    margin-top: 15px;
+    margin-top: 0.9375rem; /* 15px */
 }
 
 .btn {
     background: 0 0;
     color: var(--ng);
-    padding: 16px;
-    border: 1px solid var(--ng);
+    padding: 1rem; /* 16px */
+    border: 0.0625rem solid var(--ng); /* 1px */
     width: 100%;
-    font-size: 20px;
+    font-size: 1.25rem; /* 20px */
     font-weight: 700;
-    margin-top: 40px;
+    margin-top: 2.5rem; /* 40px */
     cursor: pointer;
     font-family: inherit;
 }
@@ -236,36 +238,188 @@ th {
 
 .fs {
     text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px dashed var(--ngd);
-    font-size: 14px;
+    margin-top: 2.5rem; /* 40px */
+    padding-top: 1.25rem; /* 20px */
+    border-top: 0.0625rem dashed var(--ngd); /* 1px */
+    font-size: 0.875rem; /* 14px */
     color: var(--tm2);
 }
 
 .dn {
     color: var(--ng);
     font-weight: 700;
-    letter-spacing: 2px;
-    margin-left: 5px;
+    letter-spacing: 0.125rem; /* 2px */
+    margin-left: 0.3125rem; /* 5px */
 }
 
-@media (max-width: 600px) {
+/* --- Media Queries untuk Responsif --- */
+
+/* Tablet dalam orientasi potret, telefon besar (contoh: <= 768px) */
+@media (max-width: 48rem) { /* 768px */
+    body {
+        padding: 1.5rem 0.75rem; /* Kurangkan padding body */
+    }
+
+    .container {
+        padding: 2rem; /* 32px */
+        border-radius: 0.75rem; /* 12px */
+    }
+
+    .ht-txt h1 {
+        font-size: 1.75rem; /* 28px */
+    }
+
+    .ht-txt p {
+        font-size: 1rem; /* 16px */
+    }
+
+    .logo {
+        width: 4.375rem; /* 70px */
+        height: 4.375rem; /* 70px */
+    }
+
+    .st {
+        font-size: 1rem; /* 16px */
+        padding: 0.5rem 1rem; /* 8px 16px */
+        margin: 1.875rem 0 1rem; /* 30px 0 16px */
+    }
+
+    input, select {
+        padding: 0.75rem; /* 12px */
+    }
+
+    .btn {
+        padding: 0.875rem; /* 14px */
+        font-size: 1.125rem; /* 18px */
+        margin-top: 2rem; /* 32px */
+    }
+
+    .fs {
+        margin-top: 2rem; /* 32px */
+        padding-top: 1rem; /* 16px */
+    }
+}
+
+/* Skrin mudah alih (yang anda sudah ada, diperhalusi dan ditambah) (contoh: <= 600px) */
+@media (max-width: 37.5rem) { /* 600px */
+    .container {
+        padding: 1.5rem; /* 24px */
+    }
+
     .ht {
         flex-direction: column-reverse;
-        gap: 15px;
+        gap: 0.9375rem; /* 15px */
+        margin-bottom: 1.25rem; /* 20px */
+        padding-bottom: 0.9375rem; /* 15px */
     }
 
-    .ht div:first-child {
+    .ht div:first-child { /* Jika ini adalah elemen placeholder, ia mungkin masih boleh disembunyikan */
         display: none;
     }
+    
+    .ht-txt {
+        flex: auto !important; /* Biarkan ia mengambil ruang yang diperlukan */
+    }
 
-    .pn {
-        flex-direction: column;
-        gap: 5px;
+    .ht-txt h1 {
+        font-size: 1.5rem; /* 24px */
+        margin-top: 0.625rem; /* Tambah margin atas jika logo di atas */
+    }
+
+    .ht-txt p {
+        font-size: 0.875rem; /* 14px */
     }
 
     .lg {
         justify-content: center;
+        width: 100%; /* Pastikan logo mengambil lebar penuh untuk pemusatan */
+        margin-bottom: 0.625rem; /* 10px */
+    }
+
+    .logo {
+        width: 3.75rem; /* 60px */
+        height: 3.75rem; /* 60px */
+    }
+
+    .pn {
+        flex-direction: column;
+        gap: 0.3125rem; /* 5px */
+    }
+
+    .st {
+        font-size: 0.9375rem; /* 15px */
+        padding: 0.625rem 0.9375rem; /* 10px 15px */
+        margin: 1.5625rem 0 0.9375rem; /* 25px 0 15px */
+    }
+
+    label {
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    input, select {
+        font-size: 0.9375rem; /* 15px */
+        padding: 0.625rem; /* 10px */
+    }
+
+    th, td {
+        padding: 0.625rem; /* 10px */
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .btn {
+        font-size: 1rem; /* 16px */
+        padding: 0.75rem; /* 12px */
+        margin-top: 1.875rem; /* 30px */
+    }
+
+    .fs {
+        font-size: 0.75rem; /* 12px */
+        margin-top: 1.875rem; /* 30px */
+    }
+}
+
+/* Skrin sangat kecil (contoh: <= 400px) */
+@media (max-width: 25rem) { /* 400px */
+    body {
+        padding: 1rem 0.5rem; /* 16px 8px */
+    }
+
+    .container {
+        padding: 1rem; /* 16px */
+        border-radius: 0.5rem; /* 8px */
+    }
+
+    .ht-txt h1 {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .ht-txt p {
+        font-size: 0.8rem; /* 12.8px */
+    }
+
+    .logo {
+        width: 3.125rem; /* 50px */
+        height: 3.125rem; /* 50px */
+    }
+
+    .st {
+        font-size: 0.875rem; /* 14px */
+        padding: 0.5rem 0.75rem; /* 8px 12px */
+        margin: 1.25rem 0 0.625rem; /* 20px 0 10px */
+    }
+
+    label {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    input, select {
+        padding: 0.5rem; /* 8px */
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .btn {
+        font-size: 0.9375rem; /* 15px */
+        padding: 0.625rem; /* 10px */
+        margin-top: 1.5rem; /* 24px */
     }
 }
