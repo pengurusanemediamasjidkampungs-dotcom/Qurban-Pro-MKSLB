@@ -1,111 +1,65 @@
-/**
- * Sistem Qurban 2026 - Logic Script
- * Developed for MKSLB Digital Hub
- */
+// TUKAR URL GOOGLE SCRIPT & NO TELEFON DI BAWAH INI
+const URL = "https://script.google.com/macros/s/AKfycbzEUBhdwQY4L7eRklbohtek8V_fx8xY4_YbeTeJe38AnlbuLRV0ozxp0Q8vB94T_D2Q/exec";
+const TEL = "60133787248";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const qurbanForm = document.getElementById('qurbanForm');
-    const bahagianInput = document.getElementById('bilangan_bahagian');
-    const totalDisplay = document.getElementById('total_bayaran');
-    
-    // Harga tetap satu bahagian (Contoh: RM 800.00)
-    const HARGA_PER_BAHAGIAN = 800;
+const sw = Swal.mixin({ background: '#0a1914', color: '#00ff88' });
+let kb = document.getElementById('kb'),
+    bi = document.getElementById('bi'),
+    bw = document.getElementById('bw'),
+    nw = document.getElementById('nw'),
+    jb = document.getElementById('jb'),
+    pi = document.querySelectorAll('.pi');
 
-    // 1. Kemaskini jumlah bayaran secara real-time
-    if (bahagianInput) {
-        bahagianInput.addEventListener('input', (e) => {
-            const bil = parseInt(e.target.value) || 0;
-            const total = bil * HARGA_PER_BAHAGIAN;
-            totalDisplay.textContent = `RM ${total.toLocaleString('ms-MY', { minimumFractionDigits: 2 })}`;
-        });
-    }
+kb.onchange = () => bi.style.display = (kb.value === 'Online Transfer') ? 'block' : 'none';
 
-    // 2. Kendalikan penghantaran borang
-    if (qurbanForm) {
-        qurbanForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // Ambil data borang
-            const formData = new FormData(qurbanForm);
-            const data = Object.fromEntries(formData.entries());
-
-            // Validasi ringkas
-            if (!data.nama_penuh || !data.no_telefon || data.bilangan_bahagian < 1) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Maklumat Tidak Lengkap',
-                    text: 'Sila pastikan semua ruangan wajib diisi dengan betul.',
-                    confirmButtonColor: '#00ff88'
-                });
-                return;
-            }
-
-            // Paparan Loading (Glassmorphism Style)
-            Swal.fire({
-                title: 'Memproses Pendaftaran...',
-                html: 'Sila tunggu sebentar sementara sistem mengesahkan data anda.',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            try {
-                // Simulasi penghantaran ke backend (API/Google Apps Script)
-                const response = await simulateSubmit(data);
-
-                if (response.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Pendaftaran Berjaya!',
-                        html: `Terima kasih <b>${data.nama_penuh}</b>. <br> Sila semak aplikasi Telegram/WhatsApp untuk langkah pembayaran seterusnya.`,
-                        confirmButtonText: 'Selesai',
-                        confirmButtonColor: '#00ff88',
-                        background: 'rgba(6, 20, 15, 0.95)',
-                        color: '#e2f1ec'
-                    }).then(() => {
-                        qurbanForm.reset();
-                        totalDisplay.textContent = 'RM 0.00';
-                    });
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ralat Sistem',
-                    text: 'Gagal menghubungi pelayan. Sila cuba sebentar lagi.',
-                    confirmButtonColor: '#dc3741'
-                });
-            }
-        });
-    }
+document.querySelectorAll('[name="kehadiran"]').forEach(r => r.onchange = () => {
+    bw.style.display = (r.value === 'Wakil') ? 'block' : 'none';
+    nw.required = (r.value === 'Wakil');
 });
 
-/**
- * Simulasi fungsi hantar data
- * Anda boleh gantikan ini dengan fetch() ke endpoint API anda
- */
-function simulateSubmit(data) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Data diterima:", data);
-            resolve({ success: true });
-        }, 2000);
+const kira = () => {
+    let c = 0;
+    pi.forEach(i => {
+        if (i.value.trim() !== '') c++;
     });
-}
+    jb.value = (c > 0) ? c * 900 : '';
+};
 
-// Fungsi tambahan untuk utiliti UI
-function formatRupiah(angka, prefix) {
-    var number_string = angka.replace(/[^,\d]/g, '').toString(),
-        split = number_string.split(','),
-        sisa = split[0].length % 3,
-        rupiah = split[0].substr(0, sisa),
-        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+pi.forEach(i => ['input', 'keyup', 'change'].forEach(e => i.addEventListener(e, kira)));
 
-    if (ribuan) {
-        separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
+document.getElementById('btn').onclick = (e) => {
+    e.preventDefault();
+    let f = document.getElementById('qForm');
+
+    if (!f.checkValidity()) {
+        f.reportValidity();
+        return sw.fire({ icon: 'warning', title: 'AMARAN', text: 'LENGKAPKAN BORANG', iconColor: '#fc0' })
     }
 
-    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix == undefined ? rupiah : (rupiah ? 'RM ' + rupiah : '');
-}
+    sw.fire({ title: 'TRANSMISI DATA', text: 'MENGHANTAR MAKLUMAT...', didOpen: () => Swal.showLoading() });
+
+    fetch(URL, { method: 'POST', body: new FormData(f) }).then(r => {
+        if (kb.value === 'Online Transfer') {
+            sw.fire({ icon: 'success', title: 'BERJAYA', text: 'SILA HANTAR RESIT KEPADA BENDAHARI', showCancelButton: true, confirmButtonText: 'HANTAR WHATSAPP', cancelButtonText: 'TUTUP' }).then(x => {
+                if (x.isConfirmed) {
+                    let wtxt = `Assalamualaikum Bendahari. Saya *${document.getElementById('nm').value}* mendaftar Qurban. Jumlah: *RM${jb.value}*. Ini resit saya.`;
+                    window.open(`https://wa.me/${TEL}?text=${encodeURIComponent(wtxt)}`, '_blank')
+                }
+                f.reset();
+                bi.style.display = bw.style.display = 'none';
+            })
+        } else if (kb.value === 'ToyyibPay') {
+            sw.fire({ icon: 'success', title: 'BERJAYA', text: 'KE TOYYIBPAY SEBENTAR LAGI...', showConfirmButton: false, timer: 3000 }).then(() => {
+                window.location.href = "https://toyyibpay.com/Bayaran-Qurban-2026";
+                f.reset();
+                bi.style.display = bw.style.display = 'none';
+            })
+        } else {
+            sw.fire('BERJAYA', 'MAKLUMAT DIREKOD. SILA BUAT SERAHAN TUNAI.', 'success').then(() => {
+                f.reset();
+                bi.style.display = bw.style.display = 'none';
+            })
+        }
+    }).catch(e => sw.fire('RALAT', 'GAGAL HANTAR', 'error'))
+};
+kira();
