@@ -1,36 +1,52 @@
 :root {
-    --ng: #00ff88;
-    --ngd: rgba(0, 255, 136, .2);
-    --db: #050b0a;
-    --pb: rgba(6, 20, 15, .65);
-    --bc: rgba(0, 255, 136, .3);
-    --tm: #e2f1ec;
-    --tm2: #8ab4a5;
-    /* Tetapkan saiz fon asas untuk rem */
+    /* Warna Neon & Tema */
+    --neon-green: #00ff88;
+    --neon-green-dim: rgba(0, 255, 136, 0.2);
+    --dark-bg: #050b0a;
+    --panel-bg: rgba(6, 20, 15, 0.65);
+    --border-color: rgba(0, 255, 136, 0.3);
+    --text-main: #e2f1ec;
+    --text-muted: #8ab4a5;
+    --red-alert: #ff4444;
+    --red-alert-dim: rgba(255, 68, 68, 0.1);
+    --pink-accent: #ff3366;
+    --pink-accent-dim: rgba(255, 51, 102, 0.05);
+
+    /* Tetapkan saiz fon asas untuk rem, membolehkan penskalaan mudah */
     font-size: 16px; 
 }
 
+/* Base Styles */
 body {
     font-family: 'Rajdhani', sans-serif;
-    background: radial-gradient(circle at 50% 0, #062a1f, var(--db)) fixed;
-    color: var(--tm);
+    background: radial-gradient(circle at 50% 0%, #062a1f 0%, var(--dark-bg) 100%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    line-height: 1.6;
     margin: 0;
-    padding: 1.875rem 0.9375rem; /* 30px 15px */
+    padding: 2.5rem 0.9375rem; /* 40px 15px */
+    min-height: 100vh;
+    display: flex; /* Untuk pemusatan menegak jika kandungan pendek */
+    flex-direction: column;
+    justify-content: center;
 }
 
+/* Container utama */
 .container {
     max-width: 53.125rem; /* 850px */
     margin: 0 auto;
-    background: var(--pb);
+    background: var(--panel-bg);
     backdrop-filter: blur(20px);
-    border: 0.0625rem solid var(--bc); /* 1px */
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.0625rem solid var(--border-color); /* 1px */
     padding: 2.5rem; /* 40px */
     border-radius: 0.75rem; /* 12px */
-    box-shadow: 0 0 1.875rem rgba(0, 255, 136, .05); /* 30px */
+    box-shadow: 0 0 1.875rem rgba(0, 255, 136, 0.05), inset 0 0 1.25rem rgba(0, 255, 136, 0.02); /* 30px, 20px */
     position: relative;
     overflow: hidden;
 }
 
+/* Kesan scanline pada container */
 .container::before {
     content: '';
     position: absolute;
@@ -38,226 +54,516 @@ body {
     left: 0;
     right: 0;
     height: 0.125rem; /* 2px */
-    background: linear-gradient(90deg, transparent, var(--ng), transparent);
-    animation: sc 4s linear infinite;
-    opacity: .5;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    animation: scanline 4s linear infinite;
+    opacity: 0.5;
 }
 
-@keyframes sc {
-    to {
-        top: 100%;
-    }
+@keyframes scanline {
+    0% { top: 0; }
+    100% { top: 100%; }
 }
 
-.ht {
+/* Header Section */
+.header-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.875rem; /* 30px */
-    border-bottom: 0.0625rem solid var(--bc); /* 1px */
-    padding-bottom: 0.9375rem; /* 15px */
+    margin-bottom: 2.5rem; /* 40px */
+    padding-bottom: 1.25rem; /* 20px */
+    border-bottom: 0.0625rem solid var(--border-color); /* 1px */
+    position: relative;
 }
-
-.ht div {
+.header-spacer, .header-logo-container {
     flex: 1;
 }
-
-.ht-txt {
-    text-align: center;
-    flex: 3 !important;
-}
-
-.ht-txt h1 {
-    color: var(--ng);
-    margin: 0 0 0.3125rem; /* 5px */
-    font-size: 2rem; /* 32px */
-    text-shadow: 0 0 0.625rem var(--ngd); /* 10px */
-}
-
-.ht-txt p {
-    margin: 0;
-    font-size: 1.125rem; /* 18px */
-}
-
-.lg {
+.header-logo-container {
     display: flex;
     justify-content: flex-end;
 }
-
-.logo {
-    width: 5rem; /* 80px */
-    height: 5rem; /* 80px */
-    border-radius: 50%;
-    border: 0.125rem solid var(--ng); /* 2px */
-    background: #fff;
+.header-text {
+    flex: 3;
+    text-align: center;
 }
-
-.st {
-    background: linear-gradient(90deg, var(--ngd), transparent);
-    color: var(--ng);
-    padding: 0.625rem 1.25rem; /* 10px 20px */
-    border-left: 0.25rem solid var(--ng); /* 4px */
-    margin: 2.1875rem 0 1.25rem; /* 35px 0 20px */
-    font-size: 1.125rem; /* 18px */
-    text-transform: uppercase;
+.header-text h1 {
+    color: var(--neon-green);
+    margin-bottom: 0.3125rem; /* 5px */
+    font-size: 2rem; /* 32px */
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.125rem; /* 2px */
+    text-shadow: 0 0 0.625rem var(--neon-green-dim); /* 10px */
+}
+.header-text p {
+    color: var(--text-main);
+    font-size: 1.125rem; /* 18px */
+    margin-top: 0;
+    font-weight: 500;
+    letter-spacing: 0.0625rem; /* 1px */
 }
 
-.fg {
-    margin-bottom: 1.25rem; /* 20px */
+.logo-masjid {
+    width: 5.3125rem; /* 85px */
+    height: 5.3125rem; /* 85px */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.125rem solid var(--neon-green); /* 2px */
+    box-shadow: 0 0 1.25rem rgba(0, 255, 136, 0.4); /* 20px */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background-color: white;
+}
+.logo-masjid:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 2.1875rem rgba(0, 255, 136, 0.8); /* 35px */
+}
+
+/* Deadline Banner */
+.deadline-banner {
+    background: rgba(255, 68, 68, 0.05);
+    border: 0.0625rem dashed var(--red-alert); /* 1px */
+    text-align: center;
+    padding: 0.9375rem; /* 15px */
+    border-radius: 0.375rem; /* 6px */
+    margin-bottom: 1.5625rem; /* 25px */
+    box-shadow: 0 0 0.9375rem var(--red-alert-dim); /* 15px */
+    animation: pulseRed 2s infinite;
+}
+.deadline-banner p {
+    margin: 0;
+    color: var(--red-alert);
+    font-weight: 600;
+    font-size: 1.125rem; /* 18px */
+    letter-spacing: 0.0625rem; /* 1px */
+}
+@keyframes pulseRed {
+    0% { box-shadow: 0 0 0.625rem var(--red-alert-dim); } /* 10px */
+    50% { box-shadow: 0 0 1.25rem rgba(255, 68, 68, 0.3); } /* 20px */
+    100% { box-shadow: 0 0 0.625rem var(--red-alert-dim); } /* 10px */
+}
+
+/* Live Counter (Dual) */
+.live-counter-box {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    border: 0.0625rem solid var(--neon-green); /* 1px */
+    border-radius: 0.5rem; /* 8px */
+    padding: 1.5625rem 1.25rem; /* 25px 20px */
+    margin-bottom: 2.1875rem; /* 35px */
+    box-shadow: 0 0 0.9375rem rgba(0, 255, 136, 0.05), inset 0 0 1.25rem rgba(0, 255, 136, 0.02); /* 15px, 20px */
+    position: relative;
+    overflow: hidden;
+}
+.live-counter-box::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, rgba(0, 255, 136, 0.1), transparent 30%);
+    animation: rotateRadar 4s linear infinite;
+    pointer-events: none;
+}
+@keyframes rotateRadar {
+    100% { transform: rotate(360deg); }
+}
+.counter-title {
+    color: var(--text-muted);
+    font-size: 1rem; /* 16px */
+    margin-top: 0;
+    margin-bottom: 0.625rem; /* 10px */
+    letter-spacing: 0.1875rem; /* 3px */
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.875rem; /* 30px */
+    flex-wrap: wrap;
+    margin-top: 0.9375rem; /* 15px */
+}
+.stat-item {
+    flex: 1;
+    min-width: 8.75rem; /* 140px */
+    max-width: 12.5rem; /* Batasi lebar item agar tidak terlalu besar di desktop */
+}
+.counter-display {
+    display: inline-block;
+    padding: 0.625rem 1.875rem; /* 10px 30px */
+    background: rgba(0, 255, 136, 0.05);
+    border-radius: 0.375rem; /* 6px */
+    border-bottom: 0.125rem solid var(--neon-green); /* 2px */
+}
+.counter-number {
+    font-size: 3.4375rem; /* 55px */
+    font-weight: 700;
+    color: var(--neon-green);
+    text-shadow: 0 0 1.5625rem var(--neon-green); /* 25px */
+    line-height: 1;
+    display: block; /* Pastikan nombor mengambil baris sendiri */
+}
+.counter-label {
+    color: var(--text-main);
+    font-size: 0.9375rem; /* 15px */
+    letter-spacing: 0.125rem; /* 2px */
+    margin-top: 0.9375rem; /* 15px */
+    margin-bottom: 0;
+    display: block; /* Pastikan label mengambil baris sendiri */
+    text-transform: uppercase;
+}
+.counter-display.baki-box {
+    border-bottom: 0.125rem solid var(--pink-accent); /* 2px */
+    background: var(--pink-accent-dim);
+}
+.counter-number.baki-num {
+    color: var(--pink-accent);
+    text-shadow: 0 0 1.5625rem var(--pink-accent); /* 25px */
+}
+.counter-label.baki-label {
+    color: var(--pink-accent);
+}
+
+/* Section Title */
+.section-title {
+    background: linear-gradient(90deg, var(--neon-green-dim) 0%, transparent 100%);
+    color: var(--neon-green);
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    border-left: 0.25rem solid var(--neon-green); /* 4px */
+    font-weight: 600;
+    margin-top: 2.1875rem; /* 35px */
+    margin-bottom: 1.5625rem; /* 25px */
+    font-size: 1.25rem; /* 20px */
+    letter-spacing: 0.0625rem; /* 1px */
+    text-transform: uppercase;
+}
+
+/* Form Styling */
+.form-row {
+    display: flex;
+    gap: 1.25rem; /* 20px */
+    margin-bottom: 1.5rem; /* Tambah sedikit margin bawah pada row */
+}
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0; /* Margin dikendalikan oleh .form-row */
+}
+.form-group {
+    margin-bottom: 1.5rem; /* 24px */
 }
 
 label {
     display: block;
-    margin-bottom: 0.5rem; /* 8px */
-    color: var(--tm2);
     font-weight: 600;
+    margin-bottom: 0.5rem; /* 8px */
+    color: var(--text-muted);
+    font-size: 1rem; /* 16px */
+    letter-spacing: 0.03125rem; /* 0.5px */
 }
-
-input,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
 select {
     width: 100%;
     padding: 0.875rem; /* 14px */
-    background: rgba(0, 0, 0, .4);
-    border: 0.0625rem solid var(--bc); /* 1px */
+    background: rgba(0, 0, 0, 0.4);
+    border: 0.0625rem solid var(--border-color); /* 1px */
     border-radius: 0.375rem; /* 6px */
-    color: var(--ng);
-    font-family: inherit;
-    font-size: 1rem; /* 16px */
     box-sizing: border-box;
+    font-size: 1rem; /* 16px */
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--neon-green);
+    transition: all 0.3s ease;
 }
-
+input::placeholder {
+    color: rgba(138, 180, 165, 0.4);
+}
 input:focus,
 select:focus {
     outline: none;
-    border-color: var(--ng);
-    box-shadow: 0 0 0.9375rem rgba(0, 255, 136, .2); /* 15px */
+    border-color: var(--neon-green);
+    background: rgba(0, 255, 136, 0.05);
+    box-shadow: 0 0 0.9375rem rgba(0, 255, 136, 0.2); /* 15px */
+}
+select option {
+    background: var(--dark-bg);
+    color: var(--neon-green);
 }
 
-.rg {
-    background: rgba(0, 0, 0, .3);
-    padding: 0.9375rem; /* 15px */
+.radio-group {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.25rem; /* 20px */
     border-radius: 0.375rem; /* 6px */
-    border: 0.0625rem solid rgba(0, 255, 136, .15); /* 1px */
+    border: 0.0625rem solid rgba(0, 255, 136, 0.15); /* 1px */
 }
-
-.ro {
+.radio-option {
     display: flex;
     align-items: center;
-    margin-bottom: 0.75rem; /* 12px */
+    margin-bottom: 0.9375rem; /* 15px */
+    padding: 0.625rem; /* 10px */
+    border-radius: 0.25rem; /* 4px */
+    transition: all 0.3s ease;
+    border: 0.0625rem solid transparent; /* 1px */
 }
-
-.ro input {
+.radio-option:hover {
+    background: rgba(0, 255, 136, 0.05);
+    border-color: rgba(0, 255, 136, 0.2);
+}
+.radio-option:last-child {
+    margin-bottom: 0;
+}
+.radio-option input {
+    margin-right: 0.9375rem; /* 15px */
     width: 1.125rem; /* 18px */
     height: 1.125rem; /* 18px */
-    margin-right: 0.75rem; /* 12px */
+    accent-color: var(--neon-green);
+    cursor: pointer;
 }
-
-.ab {
-    background: rgba(0, 255, 136, .02);
-    border: 0.0625rem dashed var(--ng); /* 1px */
-    padding: 1.25rem; /* 20px */
-    text-align: center;
-    color: var(--ng);
-    margin-bottom: 1.25rem; /* 20px */
-    font-style: italic;
-}
-
-.bi {
-    display: none;
-    background: rgba(0, 0, 0, .5);
-    border: 0.0625rem solid var(--ng); /* 1px */
-    padding: 1.25rem; /* 20px */
-    margin-top: 0.9375rem; /* 15px */
-}
-
-.bi h4 {
-    color: var(--ng);
-    margin: 0 0 0.625rem; /* 10px */
-}
-
-table {
+.radio-option label {
+    margin-bottom: 0;
+    color: var(--text-main);
+    cursor: pointer;
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 0.625rem; /* 10px */
+    font-size: 1.0625rem; /* 17px */
+    font-weight: 500; /* Sedikit kurang bold dari label utama */
 }
 
-th,
-td {
-    border: 0.0625rem solid rgba(0, 255, 136, .15); /* 1px */
-    padding: 0.75rem; /* 12px */
-}
-
-th {
-    background: rgba(0, 255, 136, .1);
-    color: var(--ng);
-}
-
-.nc {
+/* Akad Box */
+.akad-box {
+    background: rgba(0, 255, 136, 0.02);
+    border: 0.0625rem dashed var(--neon-green); /* 1px */
+    padding: 1.5625rem; /* 25px */
+    border-radius: 0.375rem; /* 6px */
+    margin-bottom: 1.5625rem; /* 25px */
+    font-style: italic;
     text-align: center;
-    color: var(--tm2);
-    width: 2.5rem; /* 40px */
+    color: var(--neon-green);
+    font-size: 1.125rem; /* 18px */
+    box-shadow: inset 0 0 1.25rem rgba(0, 255, 136, 0.05); /* 20px */
 }
 
-.pi {
-    border: none !important;
-    background: 0 0 !important;
-    padding: 0.5rem !important; /* 8px */
-}
-
-.pn {
-    color: #f36;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 0.875rem; /* 14px */
-}
-
-#bw {
+/* Bank Info */
+.bank-info {
     display: none;
+    background: rgba(0, 0, 0, 0.5);
+    border: 0.0625rem solid var(--neon-green); /* 1px */
+    padding: 1.25rem; /* 20px */
+    border-radius: 0.375rem; /* 6px */
     margin-top: 0.9375rem; /* 15px */
+    position: relative;
+    animation: glitchFadeIn 0.4s ease-out;
+}
+.bank-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.625rem; /* 10px */
+    height: 0.625rem; /* 10px */
+    border-top: 0.125rem solid var(--neon-green); /* 2px */
+    border-left: 0.125rem solid var(--neon-green); /* 2px */
+}
+.bank-info::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0.625rem; /* 10px */
+    height: 0.625rem; /* 10px */
+    border-bottom: 0.125rem solid var(--neon-green); /* 2px */
+    border-right: 0.125rem solid var(--neon-green); /* 2px */
+}
+.bank-info h4 {
+    margin-top: 0;
+    color: var(--neon-green);
+    margin-bottom: 0.9375rem; /* 15px */
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem; /* 1px */
+    font-size: 1.125rem; /* 18px */
+}
+.bank-details p {
+    margin: 0.3125rem 0; /* 5px */
+    font-size: 1.0625rem; /* 17px */
+    color: var(--text-main);
+}
+.bank-details p strong {
+    color: var(--neon-green);
 }
 
-.btn {
-    background: 0 0;
-    color: var(--ng);
-    padding: 1rem; /* 16px */
-    border: 0.0625rem solid var(--ng); /* 1px */
+@keyframes glitchFadeIn {
+    0% { opacity: 0; transform: scale(0.98); filter: hue-rotate(90deg); }
+    100% { opacity: 1; transform: scale(1); filter: hue-rotate(0deg); }
+}
+
+/* Submit Button */
+.btn-submit {
+    background: transparent;
+    color: var(--neon-green);
+    padding: 1rem 1.5rem; /* 16px 24px */
+    border: 0.0625rem solid var(--neon-green); /* 1px */
+    border-radius: 0.25rem; /* 4px */
+    cursor: pointer;
     width: 100%;
     font-size: 1.25rem; /* 20px */
     font-weight: 700;
     margin-top: 2.5rem; /* 40px */
-    cursor: pointer;
-    font-family: inherit;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1875rem; /* 3px */
+    font-family: 'Rajdhani', sans-serif;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0.625rem rgba(0, 255, 136, 0.2); /* 10px */
+}
+.btn-submit:hover {
+    background: var(--neon-green);
+    color: var(--dark-bg);
+    box-shadow: 0 0 1.5625rem rgba(0, 255, 136, 0.6); /* 25px */
+    transform: translateY(-0.125rem); /* -2px */
+}
+.btn-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 0 0.625rem rgba(0, 255, 136, 0.4); /* 10px */
 }
 
-.btn:hover {
-    background: var(--ng);
-    color: var(--db);
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.625rem; /* 10px */
+    background: rgba(0, 0, 0, 0.3);
+    border: 0.0625rem solid var(--border-color); /* 1px */
 }
-
-.fs {
+th, td {
+    border: 0.0625rem solid rgba(0, 255, 136, 0.15); /* 1px */
+    padding: 0.75rem 0.9375rem; /* 12px 15px */
+    text-align: left;
+}
+th {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--neon-green);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem; /* 1px */
+    font-size: 0.9375rem; /* 15px */
+}
+td {
+    font-size: 0.9375rem; /* 15px */
+}
+td.num-col {
     text-align: center;
-    margin-top: 2.5rem; /* 40px */
+    font-weight: bold;
+    color: var(--text-muted);
+    width: 3.125rem; /* 50px */
+}
+
+.peserta-input {
+    border: none !important;
+    background: transparent !important;
+    padding: 0.5rem !important; /* 8px */
+    color: var(--text-main) !important; /* Pastikan teks kelihatan dalam input */
+}
+.peserta-input:focus {
+    box-shadow: none !important;
+    border-bottom: 0.0625rem solid var(--neon-green) !important; /* 1px */
+    border-radius: 0 !important;
+}
+.price-note {
+    font-size: 0.9375rem; /* 15px */
+    color: var(--pink-accent);
+    margin-top: 0.625rem; /* 10px */
+    margin-bottom: 1.25rem; /* 20px */
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    letter-spacing: 0.03125rem; /* 0.5px */
+}
+#box_wakil {
+    display: none;
+    margin-top: 0.9375rem; /* 15px */
+    animation: glitchFadeIn 0.4s ease-out;
+}
+
+/* Footer */
+.footer-signature {
+    text-align: center;
+    margin-top: 3.125rem; /* 50px */
     padding-top: 1.25rem; /* 20px */
-    border-top: 0.0625rem dashed var(--ngd); /* 1px */
+    border-top: 0.0625rem dashed rgba(0, 255, 136, 0.2); /* 1px */
     font-size: 0.875rem; /* 14px */
-    color: var(--tm2);
-}
-
-.dn {
-    color: var(--ng);
-    font-weight: 700;
+    color: rgba(138, 180, 165, 0.6);
     letter-spacing: 0.125rem; /* 2px */
+    text-transform: uppercase;
+    font-family: 'Rajdhani', sans-serif;
+}
+.footer-signature .dev-name {
+    color: var(--neon-green);
+    font-weight: 700;
+    letter-spacing: 0.25rem; /* 4px */
+    text-shadow: 0 0 0.5rem rgba(0, 255, 136, 0.4); /* 8px */
     margin-left: 0.3125rem; /* 5px */
+    transition: text-shadow 0.3s ease;
+    cursor: default;
+}
+.footer-signature .dev-name:hover {
+    text-shadow: 0 0 0.9375rem rgba(0, 255, 136, 0.8); /* 15px */
 }
 
-/* --- Media Queries untuk Responsif --- */
+/* SweetAlert overrides (Pastikan ini sesuai dengan versi SweetAlert yang digunakan) */
+.swal2-popup.cyber-popup {
+    background: var(--dark-bg) !important;
+    border: 0.0625rem solid var(--neon-green) !important; /* 1px */
+    box-shadow: 0 0 1.25rem rgba(0,255,136,0.2) !important; /* 20px */
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text-main) !important;
+    font-size: 1rem !important; /* 16px */
+}
+.swal2-title {
+    color: var(--neon-green) !important;
+    font-size: 1.5rem !important; /* 24px */
+    letter-spacing: 0.0625rem !important; /* 1px */
+}
+.swal2-html-container {
+    color: var(--text-main) !important;
+    font-size: 1.0625rem !important; /* 17px */
+}
+.swal2-confirm.cyber-confirm {
+    background: transparent !important;
+    border: 0.0625rem solid var(--neon-green) !important; /* 1px */
+    color: var(--neon-green) !important;
+    border-radius: 0.25rem !important; /* 4px */
+    text-transform: uppercase;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.125rem; /* 2px */
+    font-size: 1rem !important; /* 16px */
+    padding: 0.625rem 1rem !important; /* 10px 16px */
+}
+.swal2-confirm.cyber-confirm:hover {
+    background: var(--neon-green) !important;
+    color: var(--dark-bg) !important;
+}
+.swal2-cancel.cyber-cancel {
+    background: transparent !important;
+    border: 0.0625rem solid var(--text-muted) !important; /* 1px */
+    color: var(--text-muted) !important;
+    border-radius: 0.25rem !important; /* 4px */
+    text-transform: uppercase;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.125rem; /* 2px */
+    margin-right: 0.625rem !important; /* 10px */
+    font-size: 1rem !important; /* 16px */
+    padding: 0.625rem 1rem !important; /* 10px 16px */
+}
+.swal2-cancel.cyber-cancel:hover {
+    background: var(--text-muted) !important;
+    color: var(--dark-bg) !important;
+}
 
-/* Tablet dalam orientasi potret, telefon besar (contoh: <= 768px) */
+/* Mobile Responsiveness */
 @media (max-width: 48rem) { /* 768px */
     body {
-        padding: 1.5rem 0.75rem; /* Kurangkan padding body */
+        padding: 2rem 0.75rem; /* 32px 12px */
     }
 
     .container {
@@ -265,120 +571,271 @@ th {
         border-radius: 0.75rem; /* 12px */
     }
 
-    .ht-txt h1 {
+    .header-text h1 {
         font-size: 1.75rem; /* 28px */
     }
 
-    .ht-txt p {
+    .header-text p {
         font-size: 1rem; /* 16px */
     }
 
-    .logo {
+    .logo-masjid {
         width: 4.375rem; /* 70px */
         height: 4.375rem; /* 70px */
     }
 
-    .st {
-        font-size: 1rem; /* 16px */
-        padding: 0.5rem 1rem; /* 8px 16px */
-        margin: 1.875rem 0 1rem; /* 30px 0 16px */
-    }
-
-    input, select {
+    .deadline-banner {
         padding: 0.75rem; /* 12px */
+        margin-bottom: 1.25rem; /* 20px */
+    }
+    .deadline-banner p {
+        font-size: 1rem; /* 16px */
     }
 
-    .btn {
-        padding: 0.875rem; /* 14px */
+    .counter-title {
+        font-size: 0.9375rem; /* 15px */
+    }
+    .stats-container {
+        gap: 1.5625rem; /* 25px */
+    }
+    .counter-display {
+        padding: 0.5rem 1.5rem; /* 8px 24px */
+    }
+    .counter-number {
+        font-size: 2.8125rem; /* 45px */
+    }
+    .counter-label {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .section-title {
+        font-size: 1.125rem; /* 18px */
+        padding: 0.625rem 1rem; /* 10px 16px */
+        margin-top: 1.875rem; /* 30px */
+        margin-bottom: 1.25rem; /* 20px */
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem; /* 20px */
+    }
+    label {
+        font-size: 0.9375rem; /* 15px */
+        margin-bottom: 0.4rem; /* 6.4px */
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select {
+        padding: 0.75rem; /* 12px */
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    .radio-group {
+        padding: 1rem; /* 16px */
+    }
+    .radio-option {
+        margin-bottom: 0.625rem; /* 10px */
+    }
+    .radio-option input {
+        width: 1rem; /* 16px */
+        height: 1rem; /* 16px */
+        margin-right: 0.75rem; /* 12px */
+    }
+    .radio-option label {
+        font-size: 1rem; /* 16px */
+    }
+
+    .akad-box {
+        padding: 1.25rem; /* 20px */
+        font-size: 1rem; /* 16px */
+    }
+
+    .bank-info {
+        padding: 1rem; /* 16px */
+    }
+    .bank-info h4 {
+        font-size: 1rem; /* 16px */
+        margin-bottom: 0.75rem; /* 12px */
+    }
+    .bank-details p {
+        font-size: 1rem; /* 16px */
+    }
+
+    .btn-submit {
+        padding: 0.875rem 1.25rem; /* 14px 20px */
         font-size: 1.125rem; /* 18px */
         margin-top: 2rem; /* 32px */
+        letter-spacing: 0.125rem; /* 2px */
     }
 
-    .fs {
+    th, td {
+        padding: 0.625rem 0.75rem; /* 10px 12px */
+        font-size: 0.875rem; /* 14px */
+    }
+    td.num-col {
+        width: 2.5rem; /* 40px */
+    }
+    .price-note {
+        font-size: 0.875rem; /* 14px */
+        margin-top: 0.5rem; /* 8px */
+        margin-bottom: 1rem; /* 16px */
+    }
+    
+    .footer-signature {
         margin-top: 2rem; /* 32px */
         padding-top: 1rem; /* 16px */
+        font-size: 0.8125rem; /* 13px */
     }
 }
 
-/* Skrin mudah alih (yang anda sudah ada, diperhalusi dan ditambah) (contoh: <= 600px) */
 @media (max-width: 37.5rem) { /* 600px */
     .container {
         padding: 1.5rem; /* 24px */
     }
 
-    .ht {
+    .header-title {
         flex-direction: column-reverse;
         gap: 0.9375rem; /* 15px */
-        margin-bottom: 1.25rem; /* 20px */
+        margin-bottom: 1.5rem; /* 24px */
         padding-bottom: 0.9375rem; /* 15px */
     }
-
-    .ht div:first-child { /* Jika ini adalah elemen placeholder, ia mungkin masih boleh disembunyikan */
+    .header-spacer {
         display: none;
     }
-    
-    .ht-txt {
-        flex: auto !important; /* Biarkan ia mengambil ruang yang diperlukan */
+    .header-logo-container {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 0.625rem; /* 10px */
     }
-
-    .ht-txt h1 {
+    .header-text {
+        flex: auto; /* Biarkan ia mengambil ruang yang diperlukan */
+    }
+    .header-text h1 {
         font-size: 1.5rem; /* 24px */
-        margin-top: 0.625rem; /* Tambah margin atas jika logo di atas */
+        margin-top: 0.625rem; /* 10px */
+        letter-spacing: 0.0625rem; /* 1px */
     }
-
-    .ht-txt p {
+    .header-text p {
         font-size: 0.875rem; /* 14px */
     }
 
-    .lg {
-        justify-content: center;
-        width: 100%; /* Pastikan logo mengambil lebar penuh untuk pemusatan */
-        margin-bottom: 0.625rem; /* 10px */
-    }
-
-    .logo {
+    .logo-masjid {
         width: 3.75rem; /* 60px */
         height: 3.75rem; /* 60px */
     }
 
-    .pn {
-        flex-direction: column;
-        gap: 0.3125rem; /* 5px */
-    }
-
-    .st {
-        font-size: 0.9375rem; /* 15px */
-        padding: 0.625rem 0.9375rem; /* 10px 15px */
-        margin: 1.5625rem 0 0.9375rem; /* 25px 0 15px */
-    }
-
-    label {
-        font-size: 0.9375rem; /* 15px */
-    }
-
-    input, select {
-        font-size: 0.9375rem; /* 15px */
+    .deadline-banner {
         padding: 0.625rem; /* 10px */
+        margin-bottom: 1rem; /* 16px */
+    }
+    .deadline-banner p {
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    .live-counter-box {
+        padding: 1.25rem; /* 20px */
+        margin-bottom: 1.875rem; /* 30px */
+    }
+    .counter-title {
+        font-size: 0.875rem; /* 14px */
+        letter-spacing: 0.125rem; /* 2px */
+    }
+    .stats-container {
+        flex-direction: column; /* Stacks vertically */
+        gap: 1.25rem; /* 20px */
+        margin-top: 1rem; /* 16px */
+    }
+    .stat-item {
+        min-width: unset; /* Remove min-width constraint */
+        width: 100%; /* Take full width */
+    }
+    .counter-number {
+        font-size: 2.5rem; /* 40px */
+    }
+    .counter-label {
+        font-size: 0.8125rem; /* 13px */
+        letter-spacing: 0.0625rem; /* 1px */
+    }
+
+    .section-title {
+        font-size: 1rem; /* 16px */
+        padding: 0.5rem 0.75rem; /* 8px 12px */
+        margin-top: 1.5rem; /* 24px */
+        margin-bottom: 1rem; /* 16px */
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0; /* Alihkan semua margin ke .form-group */
+    }
+    .form-group {
+        margin-bottom: 1.25rem; /* 20px */
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select {
+        padding: 0.625rem; /* 10px */
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    .radio-group {
+        padding: 0.75rem; /* 12px */
+    }
+    .radio-option {
+        margin-bottom: 0.5rem; /* 8px */
+        padding: 0.4rem; /* 6.4px */
+    }
+    .radio-option label {
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    .akad-box {
+        padding: 1rem; /* 16px */
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    .bank-info {
+        padding: 0.75rem; /* 12px */
+        margin-top: 0.75rem; /* 12px */
+    }
+    .bank-info h4 {
+        font-size: 0.9375rem; /* 15px */
+        margin-bottom: 0.625rem; /* 10px */
+    }
+    .bank-details p {
+        font-size: 0.9375rem; /* 15px */
+    }
+
+    .btn-submit {
+        padding: 0.75rem 1rem; /* 12px 16px */
+        font-size: 1rem; /* 16px */
+        margin-top: 1.875rem; /* 30px */
+        letter-spacing: 0.0625rem; /* 1px */
     }
 
     th, td {
-        padding: 0.625rem; /* 10px */
-        font-size: 0.875rem; /* 14px */
+        padding: 0.5rem 0.625rem; /* 8px 10px */
+        font-size: 0.8125rem; /* 13px */
+    }
+    .price-note {
+        flex-direction: column;
+        gap: 0.3125rem; /* 5px */
+        font-size: 0.8125rem; /* 13px */
     }
 
-    .btn {
-        font-size: 1rem; /* 16px */
-        padding: 0.75rem; /* 12px */
+    .footer-signature {
         margin-top: 1.875rem; /* 30px */
-    }
-
-    .fs {
+        padding-top: 0.9375rem; /* 15px */
         font-size: 0.75rem; /* 12px */
-        margin-top: 1.875rem; /* 30px */
+    }
+    .footer-signature .dev-name {
+        letter-spacing: 0.125rem; /* 2px */
     }
 }
 
-/* Skrin sangat kecil (contoh: <= 400px) */
 @media (max-width: 25rem) { /* 400px */
     body {
         padding: 1rem 0.5rem; /* 16px 8px */
@@ -389,37 +846,107 @@ th {
         border-radius: 0.5rem; /* 8px */
     }
 
-    .ht-txt h1 {
+    .header-title {
+        margin-bottom: 1rem; /* 16px */
+        padding-bottom: 0.625rem; /* 10px */
+    }
+    .header-text h1 {
         font-size: 1.25rem; /* 20px */
     }
-
-    .ht-txt p {
-        font-size: 0.8rem; /* 12.8px */
+    .header-text p {
+        font-size: 0.75rem; /* 12px */
     }
 
-    .logo {
+    .logo-masjid {
         width: 3.125rem; /* 50px */
         height: 3.125rem; /* 50px */
+        border: 0.0625rem solid var(--neon-green); /* 1px */
     }
 
-    .st {
+    .deadline-banner {
+        padding: 0.5rem; /* 8px */
+        margin-bottom: 0.75rem; /* 12px */
+    }
+    .deadline-banner p {
         font-size: 0.875rem; /* 14px */
-        padding: 0.5rem 0.75rem; /* 8px 12px */
-        margin: 1.25rem 0 0.625rem; /* 20px 0 10px */
+    }
+
+    .live-counter-box {
+        padding: 1rem; /* 16px */
+        margin-bottom: 1.5rem; /* 24px */
+    }
+    .counter-number {
+        font-size: 2rem; /* 32px */
+    }
+    .counter-label {
+        font-size: 0.75rem; /* 12px */
+    }
+
+    .section-title {
+        font-size: 0.875rem; /* 14px */
+        padding: 0.4rem 0.625rem; /* 6.4px 10px */
+        margin-top: 1.25rem; /* 20px */
+        margin-bottom: 0.75rem; /* 12px */
     }
 
     label {
         font-size: 0.875rem; /* 14px */
+        margin-bottom: 0.3rem; /* 4.8px */
     }
-
-    input, select {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select {
         padding: 0.5rem; /* 8px */
         font-size: 0.875rem; /* 14px */
     }
 
-    .btn {
-        font-size: 0.9375rem; /* 15px */
+    .radio-group {
         padding: 0.625rem; /* 10px */
+    }
+    .radio-option input {
+        width: 0.9rem; /* 14.4px */
+        height: 0.9rem; /* 14.4px */
+        margin-right: 0.5rem; /* 8px */
+    }
+    .radio-option label {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .akad-box {
+        padding: 0.75rem; /* 12px */
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .bank-info {
+        padding: 0.625rem; /* 10px */
+    }
+    .bank-info h4 {
+        font-size: 0.875rem; /* 14px */
+    }
+    .bank-details p {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .btn-submit {
+        padding: 0.625rem 0.75rem; /* 10px 12px */
+        font-size: 0.9375rem; /* 15px */
         margin-top: 1.5rem; /* 24px */
+        letter-spacing: 0.05rem; /* 0.8px */
+    }
+
+    th, td {
+        padding: 0.4rem 0.5rem; /* 6.4px 8px */
+        font-size: 0.75rem; /* 12px */
+    }
+    .price-note {
+        font-size: 0.75rem; /* 12px */
+    }
+
+    .footer-signature {
+        margin-top: 1.5rem; /* 24px */
+        padding-top: 0.75rem; /* 12px */
+        font-size: 0.6875rem; /* 11px */
     }
 }
