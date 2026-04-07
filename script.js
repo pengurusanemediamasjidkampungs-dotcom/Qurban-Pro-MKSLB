@@ -1,32 +1,37 @@
 // TUKAR URL GOOGLE SCRIPT & NO TELEFON DI BAWAH INI
 const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzEUBhdwQY4L7eRklbohtek8V_fx8xY4_YbeTeJe38AnlbuLRV0ozxp0Q8vB94T_D2Q/exec";
 const WHATSAPP_TEL_NUMBER = "60133787248";
+const PESERTA_SEDIA_ADA = 142; // Anda boleh ubah angka asas ini
 
 // Cache DOM elements for better performance and readability
 const form = document.getElementById('qForm');
-const paymentMethodSelect = document.getElementById('kb');
-const bankInfoDiv = document.getElementById('bi');
-const representativeInfoDiv = document.getElementById('bw');
-const representativeNameInput = document.getElementById('nw');
-const totalPaymentInput = document.getElementById('jb');
-const participantNameInputs = document.querySelectorAll('.pi');
+const paymentMethodSelect = document.getElementById('kaedah_bayar'); // Diubah dari 'kb'
+const bankInfoDiv = document.getElementById('bank_info'); // Diubah dari 'bi'
+const representativeInfoDiv = document.getElementById('wakil_info'); // ID baru untuk wakil
+const representativeNameInput = document.getElementById('nama_wakil'); // ID baru untuk nama wakil
+const totalPaymentInput = document.getElementById('jumlah_bayar'); // Diubah dari 'jb'
+const participantNameInputs = document.querySelectorAll('.peserta-input'); // Diubah dari '.pi'
 const submitButton = document.getElementById('btn');
-const participantNameFullInput = document.getElementById('nm'); // Input untuk Nama Penuh Pewakil
+const participantNameFullInput = document.getElementById('nama_penuh'); // Input untuk Nama Penuh Pewakil (Dahulunya 'nm')
+
+// Elemen statistik live
+const liveCounterText = document.getElementById('liveCounterText');
+const bakiSlotText = document.getElementById('bakiSlotText');
 
 // Initialize SweetAlert2 mixin with custom styles
 const swalMixin = Swal.mixin({
     background: '#0a1914', // Dark background for the alert
-    color: '#e2f1ec',     // Light text color
+    color: '#e2f1ec', // Light text color
     confirmButtonColor: '#00ff88', // Green for confirm button
-    cancelButtonColor: '#dc3545'  // Red for cancel button
+    cancelButtonColor: '#dc3545' // Red for cancel button
 });
 
 // --- Event Listeners ---
 
 // 1. Event Listener for Payment Method Selection
-// Shows/hides bank account info based on 'Online Transfer' selection.
+// Shows/hides bank account info based on 'Online Transfer' or 'ToyyibPay' selection.
 paymentMethodSelect.addEventListener('change', () => {
-    bankInfoDiv.style.display = (paymentMethodSelect.value === 'Online Transfer') ? 'block' : 'none';
+    bankInfoDiv.style.display = (paymentMethodSelect.value === 'Online Transfer' || paymentMethodSelect.value === 'ToyyibPay') ? 'block' : 'none';
 });
 
 // 2. Event Listeners for Attendance (Kehadiran) Radio Buttons
@@ -43,7 +48,7 @@ document.querySelectorAll('[name="kehadiran"]').forEach(radio => {
     });
 });
 
-// 3. Function to Calculate Total Payment based on active participants
+// 3. Function to Calculate Total Payment & Update Live Statistics
 const calculateTotalPayment = () => {
     let activeParticipantsCount = 0;
     participantNameInputs.forEach(input => {
@@ -51,9 +56,19 @@ const calculateTotalPayment = () => {
             activeParticipantsCount++;
         }
     });
+
+    // Kemaskini RM
     // Display total payment, formatted to 2 decimal places for currency.
     // If no participants, clear the total payment field.
     totalPaymentInput.value = (activeParticipantsCount > 0) ? (activeParticipantsCount * 900).toFixed(2) : '';
+
+    // KEMASKINI STATISTIK CYBER (Tambahan supaya counter bergerak)
+    if (liveCounterText) liveCounterText.innerText = PESERTA_SEDIA_ADA + activeParticipantsCount;
+    if (bakiSlotText) {
+        let baki = 7 - ((PESERTA_SEDIA_ADA + activeParticipantsCount) % 7);
+        if (baki === 7) baki = 0; // Jika genap 7, baki adalah 0
+        bakiSlotText.innerText = baki;
+    }
 };
 
 // 4. Add Event Listeners to participant name inputs for live calculation
@@ -125,7 +140,7 @@ submitButton.addEventListener('click', async (event) => {
                 timer: 3000 // Redirect after 3 seconds
             }).then(() => {
                 // Redirect to ToyyibPay payment gateway
-                window.location.href = "https://toyyibpay.com/Bayaran-Qurban-2026";
+                window.location.href = "https://toyyibpay.com/Bayaran-Qurban-2026"; // Pastikan URL ini betul dan berfungsi
                 resetFormState(); // Reset form and UI
             });
         } else { // 'Tunai'
@@ -156,7 +171,7 @@ const resetFormState = () => {
     bankInfoDiv.style.display = 'none'; // Hide bank info
     representativeInfoDiv.style.display = 'none'; // Hide representative info
     representativeNameInput.required = false; // Ensure representative name is not required after reset
-    calculateTotalPayment(); // Recalculate to clear the total payment field
+    calculateTotalPayment(); // Recalculate to clear the total payment field and update live stats
 };
 
 // --- Initial Setup ---
@@ -164,5 +179,3 @@ const resetFormState = () => {
 // Perform initial total payment calculation when the page loads
 // This ensures the total payment field reflects any pre-filled data or is empty correctly.
 calculateTotalPayment();
-
-// You can request an image of the form by outputting
